@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="compressed.js"></script>
+    <script>
+        function assert(condition, message) {
+            if (condition) {
+                return message + " - OK";
+            }
+            return message + " - failed";
+        }
+        function vai() {
+            const text =  "This is a random number: " + Math.random();
+            const ring = "{\"0\":\"024627032575180c2773b3eedd3a163dc2f3c6c84f9d0a1fc561a9578a15e6d0e3\",\"1\":\"02b266b2c32ba5fc8d203c8f3e65e50480dfc10404ed089bad5f9ac5a45ffa4251\",\"2\":\"031ea759e3401463b82e2132535393076dde89bf2af7fc550f0793126669ffb5cd\",\"3\":\"03320cd05f3538159693cd253c30ec4972fa06ad10f1812951923a5ea063e9748c\",\"4\":\"039b9033d0377e3af7fdf4369134f3ec96aa03326fd07f89d60dc3ba70d0a19956\",\"5\":\"03c81094edb63ba28b1e4d5556d91dc030b725e105be94fb4005bee987f80a38f0\",\"6\":\"032077679a3f1579acc22308f09b7d5f597cba4ea9f314b8aaf86ab2f052fa0157\",\"7\":\"039b9033d0377e3af7fdf4369134f3ec96aa03326fd07f89d60dc3ba70d0a19956\",\"8\":\"02dcdb96d05d6cd36ce7014a69ebce8b48f8d7de46ce3bfa99482af65284697e13\",\"9\":\"0464df85a16f210d35454a5c34621aaf2a08dbb198ef092ba410907312db493062b390997f38efc594efa995843102eeb7a9f0c5ff391bf0db45f08f39a7c5590f\"}";
+            const ring2 = "{\"0\":\"024627032575180c2773b3eedd3a163dc2f3c6c84f9d0a1fc561a9578a15e6d0e4\",\"1\":\"02b266b2c32ba5fc8d203c8f3e65e50480dfc10404ed089bad5f9ac5a45ffa4251\",\"2\":\"031ea759e3401463b82e2132535393076dde89bf2af7fc550f0793126669ffb5cd\",\"3\":\"03320cd05f3538159693cd253c30ec4972fa06ad10f1812951923a5ea063e9748c\",\"4\":\"039b9033d0377e3af7fdf4369134f3ec96aa03326fd07f89d60dc3ba70d0a19956\",\"5\":\"03c81094edb63ba28b1e4d5556d91dc030b725e105be94fb4005bee987f80a38f0\",\"6\":\"032077679a3f1579acc22308f09b7d5f597cba4ea9f314b8aaf86ab2f052fa0157\",\"7\":\"039b9033d0377e3af7fdf4369134f3ec96aa03326fd07f89d60dc3ba70d0a19956\",\"8\":\"02dcdb96d05d6cd36ce7014a69ebce8b48f8d7de46ce3bfa99482af65284697e13\",\"9\":\"0464df85a16f210d35454a5c34621aaf2a08dbb198ef092ba410907312db493062b390997f38efc594efa995843102eeb7a9f0c5ff391bf0db45f08f39a7c5590f\"}";
+            const smallring = "{\"0\":\"024627032575180c2773b3eedd3a163dc2f3c6c84f9d0a1fc561a9578a15e6d0e3\",\"1\":\"02b266b2c32ba5fc8d203c8f3e65e50480dfc10404ed089bad5f9ac5a45ffa4251\",\"2\":\"031ea759e3401463b82e2132535393076dde89bf2af7fc550f0793126669ffb5cd\",\"3\":\"03320cd05f3538159693cd253c30ec4972fa06ad10f1812951923a5ea063e9748c\",\"4\":\"039b9033d0377e3af7fdf4369134f3ec96aa03326fd07f89d60dc3ba70d0a19956\",\"5\":\"03c81094edb63ba28b1e4d5556d91dc030b725e105be94fb4005bee987f80a38f0\",\"6\":\"032077679a3f1579acc22308f09b7d5f597cba4ea9f314b8aaf86ab2f052fa0157\",\"7\":\"039b9033d0377e3af7fdf4369134f3ec96aa03326fd07f89d60dc3ba70d0a19956\",\"8\":\"02dcdb96d05d6cd36ce7014a69ebce8b48f8d7de46ce3bfa99482af65284697e13\"}";
+            document.body.appendChild(document.createElement("hr"));
+
+            var textnode0 = document.createTextNode(text);
+            document.body.appendChild(textnode0);
+            document.body.appendChild(document.createElement("hr"));
+
+            var rodado1 = urs.roda("", text, ring,"{\"address\":\"abcd9d4pZutCykB3Why5f3V7hG27EbcqKb\",\"privkey\":\"2cce28294646608595cf84e91cda1d7d869089f04aefa6b6cd49573a6821c770\",\"pubkey\":\"0464df85a16f210d35454a5c34621aaf2a08dbb198ef092ba410907312db493062b390997f38efc594efa995843102eeb7a9f0c5ff391bf0db45f08f39a7c5590f\"}", "",false);
+            var textnode1 = document.createTextNode("Generated signature: "  + rodado1);
+            document.body.appendChild(textnode1);
+            document.body.appendChild(document.createElement("hr"));
+
+            var rodado2 = urs.roda(text,"", ring,"", "1AAA" + rodado1.substr(4),false);
+            var textnode2 = document.createTextNode(assert(rodado2 == "false", "Verifying with a wrong signature"));
+            document.body.appendChild(textnode2);
+            document.body.appendChild(document.createElement("hr"));
+
+            var rodado3 = urs.roda(text,"", ring,"", rodado1, false);
+            var textnode3 = document.createTextNode(assert(rodado3 == "true", "Verifying with everything ok"));
+            document.body.appendChild(textnode3);
+            document.body.appendChild(document.createElement("hr"));
+
+            var rodado4 = urs.roda(text + "bla","", ring,"", rodado1 ,false);
+            var textnode4 = document.createTextNode(assert(rodado4 == "false", "Verifying with a wrong message"));
+            document.body.appendChild(textnode4);
+            document.body.appendChild(document.createElement("hr"));
+
+            var rodado5 = urs.roda(text,"", smallring,"", rodado1, false);
+            var textnode5 = document.createTextNode(assert(rodado5 == "false", "Verifying with a small ring"));
+            document.body.appendChild(textnode5);
+            document.body.appendChild(document.createElement("hr"));
+
+            var rodado6 = urs.roda(text ,"", ring2,"", rodado1,false);
+            var textnode6 = document.createTextNode(assert(rodado6 == "false", "Verifying with one wrong pubkey in the ring"));
+            document.body.appendChild(textnode6);
+            document.body.appendChild(document.createElement("hr"));
+
+        }
+    </script>
+</head>
+<body>
+<button onclick="vai()">Click me</button>
+</body>
+</html>
